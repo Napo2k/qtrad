@@ -1,0 +1,48 @@
+//@version=5
+strategy("EMA Crossover Strategy", overlay=true)
+
+// Input parameters
+shortEmaLength = input.int(50, title="Short EMA Length", minval=1)
+longEmaLength = input.int(200, title="Long EMA Length", minval=1)
+
+// Calculate EMAs
+shortEma = ta.ema(close, shortEmaLength)
+longEma = ta.ema(close, longEmaLength)
+
+// Plot EMAs
+plot(shortEma, color=color.blue, title="Short EMA")
+plot(longEma, color=color.red, title="Long EMA")
+
+// Buy signal: Short EMA crosses above Long EMA
+buySignal = ta.crossover(shortEma, longEma)
+
+// Sell signal: Short EMA crosses below Long EMA
+sellSignal = ta.crossunder(shortEma, longEma)
+
+// Execute trades
+if (buySignal)
+    strategy.entry("Buy", strategy.long)
+
+if (sellSignal)
+    strategy.close("Buy")
+
+// OPTIONAL: Add performance filters (e.g., RSI, MACD, Volume) for better results
+// Uncomment and customize the section below for additional filters
+
+/*
+rsiLength = input.int(14, title="RSI Length")
+rsiOverbought = input.int(70, title="RSI Overbought")
+rsiOversold = input.int(30, title="RSI Oversold")
+
+rsi = ta.rsi(close, rsiLength)
+
+if (buySignal and rsi < rsiOversold)
+    strategy.entry("Buy", strategy.long)
+
+if (sellSignal and rsi > rsiOverbought)
+    strategy.close("Buy")
+*/
+
+// Debug and observe signals
+plotshape(buySignal, color=color.green, style=shape.labelup, title="Buy Signal", location=location.belowbar)
+plotshape(sellSignal, color=color.red, style=shape.labeldown, title="Sell Signal", location=location.abovebar)
