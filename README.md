@@ -1,44 +1,35 @@
-\# Qtrad and algo trading repository
+# Qtrad and Algo Trading Repository
 
+## Workflow
 
+### To Generate Strategies
 
-\- Workflow
+- **StrategyQuant** (for MetaTrader 5):
+  - Generate
+  - Retest
+  - Optimize
 
-&nbsp;	- To generate strategies
+- **TradingView** or also **MetaTrader 5**:
+  - Search for descriptions of strategies and have **Claude** generate them:
+    - Use YouTube with a strategy -> Gemini to transcribe -> Claude to generate for TradingView and MetaTrader 5.
 
-&nbsp;		- StrategyQuant (for MetaTrader 5)
+- **MetaTrader 5 Market**:
+  - Explore available strategies.
 
-&nbsp;			- Generate
+- **TradingView**:
+  - Investigate mechanisms for strategy generation.
 
-&nbsp;			- Retest
+### Select a Few Strategies
 
-&nbsp;			- Optimize
+- From **Squant** into MetaTrader (or AI-generated):
+  - Retest on all symbols:
+    - Try H1 and Daily timeframes.
+  - Grab ones that are profitable **across several symbols**.
 
-&nbsp;		- Trading View or also MetaTrader 5
+### Deploy
 
-&nbsp;			- Search for descriptions of strategies and have \*\*Claude\*\* generate them
-
-&nbsp;				- Youtube with a strategy -> Gemini to transcribe -> Claude to generate for TradingView and MetaTrader5
-
-&nbsp;		- MetaTrader 5 market
-
-&nbsp;		- I imagine TradingView also has mechanisms for that
-
-&nbsp;	- Select a few from Squant into MetaTrader (or AI generated)
-
-&nbsp;		- Retest on all symbols
-
-&nbsp;			- Try H1, Daily
-
-&nbsp;		- Grab ones that are profitable \*across several symbols\*
-
-&nbsp;	- Deploy
-
-&nbsp;		- Slow start with little money \*somewhere\*
-
-&nbsp;		- Start with the computer at work
-
-&nbsp;			- Both TradingView and MT5
-
-&nbsp;			- Maybe one broker each
+- Start slow with a small amount of money **somewhere**.
+- Begin with the computer at work:
+  - Use both TradingView and MetaTrader 5.
+  - Consider using one broker for each platform.
 
