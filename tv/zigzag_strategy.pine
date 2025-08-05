@@ -1,0 +1,152 @@
+//@version=5
+strategy("ZigZag Volume Profile Strategy", overlay=true, initial_capital=10000, default_qty_type=strategy.percent_of_equity, default_qty_value=100)
+
+// --------------------------------------------------------------------------------------------------------------------
+// 📌 STRATEGY INPUTS
+// --------------------------------------------------------------------------------------------------------------------
+// Risk Management
+stopLossPercent = input.float(2.0, "Stop Loss %", minval=0.1, maxval=10.0, group="Risk Management")
+takeProfitPercent = input.float(4.0, "Take Profit %", minval=0.1, maxval=20.0, group="Risk Management")
+maxPositions = input.int(1, "Max Concurrent Positions", minval=1, maxval=5, group="Risk Management")
+
+// Original ZigZag Inputs
+swingLength = input.int(150, "Swing Length", group="ZigZag Settings")
+channelWidthFactor = input.float(1, "Channel Width", minval=0.3, maxval=2, step=0.1, group="ZigZag Settings")
+volumeBinCount = input.int(10, "Volume Bins", maxval=20, group="Volume Profile")/2
+
+// Strategy Specific
+requirePocConfirmation = input.bool(true, "Require POC Confirmation", group="Strategy Rules")
+minSwingSize = input.float(1.0, "Minimum Swing Size %", minval=0.1, maxval=10.0, group="Strategy Rules")
+
+// --------------------------------------------------------------------------------------------------------------------
+// 📌 ZIGZAG CALCULATIONS
+// --------------------------------------------------------------------------------------------------------------------
+var float priceHigh = high
+var float priceLow = low
+var int barIndexHigh = bar_index
+var int barIndexLow = bar_index
+var bool isBullish = true
+var line zigzagLine = na
+var line[] pocLineArray = array.new_line()
+
+// Update highs and lows
+if high > priceHigh
+    priceHigh := high
+    barIndexHigh := bar_index
+    
+if low < priceLow
+    priceLow := low
+    barIndexLow := bar_index
+
+// Detect trend changes
+trendChanged = false
+if isBullish and low < priceLow[1]
+    isBullish := false
+    priceHigh := high
+    barIndexHigh := bar_index
+    trendChanged := true
+    
+else if not isBullish and high > priceHigh[1]
+    isBullish := true
+    priceLow := low
+    barIndexLow := bar_index
+    trendChanged := true
+
+// --------------------------------------------------------------------------------------------------------------------
+// 📌 VOLUME PROFILE CALCULATIONS
+// --------------------------------------------------------------------------------------------------------------------
+// Calculate POC (Point of Control)
+if trendChanged
+    var float[] volumes = array.new_float(0)
+    var float[] prices = array.new_float(0)
+    
+    // Calculate price range for volume profile
+    float rangeHigh = math.max(priceHigh, priceLow)
+    float rangeLow = math.min(priceHigh, priceLow)
+    float priceStep = (rangeHigh - rangeLow) / volumeBinCount
+    
+    // Initialize arrays
+    array.clear(volumes)
+    array.clear(prices)
+    
+    for i = 0 to volumeBinCount
+        array.push(volumes, 0)
+        array.push(prices, rangeLow + i * priceStep)
+    
+    // Add volume to corresponding price levels
+    for i = 0 to swingLength
+        float price = close[i]
+        if price >= rangeLow and price <= rangeHigh
+            int bin = math.floor((price - rangeLow) / priceStep)
+            if bin >= 0 and bin < array.size(volumes)
+                array.set(volumes, bin, array.get(volumes, bin) + volume[i])
+    
+    // Find POC
+    float maxVolume = 0
+    float pocPrice = na
+    
+    for i = 0 to array.size(volumes) - 1
+        if array.get(volumes, i) > maxVolume
+            maxVolume := array.get(volumes, i)
+            pocPrice := array.get(prices, i)
+    
+    if not na(pocPrice)
+        line pocLine = line.new(bar_index, pocPrice, bar_index + 15, pocPrice, color=color.yellow, width=2)
+        array.push(pocLineArray, pocLine)
+
+// --------------------------------------------------------------------------------------------------------------------
+// 📌 STRATEGY VARIABLES
+// --------------------------------------------------------------------------------------------------------------------
+var bool inLongPosition = false
+var bool inShortPosition = false
+var float entryPrice = na
+var int positionCount = 0
+
+// --------------------------------------------------------------------------------------------------------------------
+// 📌 TRADE EXECUTION LOGIC
+// --------------------------------------------------------------------------------------------------------------------
+executeTradeEntry(direction) =>
+    stopPrice = direction == 1 ? close * (1 - stopLossPercent/100) : close * (1 + stopLossPercent/100)
+    targetPrice = direction == 1 ? close * (1 + takeProfitPercent/100) : close * (1 - takeProfitPercent/100)
+    
+    if direction == 1
+        strategy.entry("Long", strategy.long)
+        strategy.exit("Long Exit", "Long", stop=stopPrice, limit=targetPrice)
+        [true, false, close, 1]
+    else if direction == -1
+        strategy.entry("Short", strategy.short)
+        strategy.exit("Short Exit", "Short", stop=stopPrice, limit=targetPrice)
+        [false, true, close, 1]
+    else
+        [false, false, na, 0]
+
+// --------------------------------------------------------------------------------------------------------------------
+// 📌 STRATEGY SIGNALS
+// --------------------------------------------------------------------------------------------------------------------
+if isBullish != isBullish[1] and positionCount < maxPositions
+    swingSize = math.abs(priceHigh - priceLow) / priceLow * 100
+    
+    if swingSize >= minSwingSize
+        if isBullish and (not requirePocConfirmation or close > array.get(pocLineArray, array.size(pocLineArray)-1).get_y1())
+            [newLong, newShort, newEntry, posChange] = executeTradeEntry(1)
+            inLongPosition := newLong
+            inShortPosition := newShort
+            entryPrice := newEntry
+            positionCount := positionCount + posChange
+            
+        else if not isBullish and (not requirePocConfirmation or close < array.get(pocLineArray, array.size(pocLineArray)-1).get_y1())
+            [newLong, newShort, newEntry, posChange] = executeTradeEntry(-1)
+            inLongPosition := newLong
+            inShortPosition := newShort
+            entryPrice := newEntry
+            positionCount := positionCount + posChange
+
+// Position Management
+if strategy.position_size == 0
+    inLongPosition := false
+    inShortPosition := false
+    positionCount := math.max(0, positionCount - 1)
+
+// Plot Strategy Info
+plotshape(inLongPosition ? low : na, "Long Position", shape.triangleup, location.belowbar, color.green)
+plotshape(inShortPosition ? high : na, "Short Position", shape.triangledown, location.abovebar, color.red)

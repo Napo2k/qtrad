@@ -1,0 +1,98 @@
+//@version=5
+strategy("Market Structure & Supply/Demand Strategy", overlay=true, initial_capital=10000, default_qty_type=strategy.percent_of_equity, default_qty_value=100)
+
+// Input parameters
+AnalysisTimeframe = input.timeframe("60", title="Analysis Timeframe")
+StructurePeriod = input.int(50, title="Bars to Analyze for Structure")
+MinImpulsiveMove = input.float(50, title="Min Points for Impulsive Move")
+ZoneBuffer = input.float(5, title="Zone Buffer (points)")
+MaxZones = input.int(5, title="Maximum Zones to Track")
+ZoneValidityHours = input.int(24, title="Zone Validity (hours)")
+RequireZoneRetest = input.bool(true, title="Require Zone Retest for Entry")
+ShowDebugInfo = input.bool(true, title="Show Debug Information")
+DrawZones = input.bool(true, title="Draw Supply/Demand Zones")
+DrawStructure = input.bool(true, title="Draw Market Structure")
+
+// Risk Management Parameters
+StopLossPercent = input.float(2.0, "Stop Loss %", minval=0.1, maxval=10.0)
+TakeProfitPercent = input.float(4.0, "Take Profit %", minval=0.1, maxval=20.0)
+
+// Variables
+var float lastValidHigh = na
+var float lastValidLow = na
+var line[] supplyLines = array.new_line()
+var line[] demandLines = array.new_line()
+var bool inLongPosition = false
+var bool inShortPosition = false
+
+// Function to analyze market structure
+analyzeMarketStructure() =>
+    var float swingHigh = na
+    var float swingLow = na
+    for i = 2 to StructurePeriod
+        if high[i] > high[i + 1] and high[i] > high[i - 1]
+            swingHigh := high[i]
+        if low[i] < low[i + 1] and low[i] < low[i - 1]
+            swingLow := low[i]
+    [swingHigh, swingLow]
+
+// Function to identify supply and demand zones
+identifySupplyDemandZones() =>
+    var float[] supplyZones = array.new_float(0)
+    var float[] demandZones = array.new_float(0)
+    for i = 1 to MaxZones
+        if close[i] - open[i] > MinImpulsiveMove
+            array.push(demandZones, low[i] - ZoneBuffer)
+        if open[i] - close[i] > MinImpulsiveMove
+            array.push(supplyZones, high[i] + ZoneBuffer)
+    [supplyZones, demandZones]
+
+// Function to execute trading opportunities - modified to return position states
+executeTrades(lastHigh, lastLow, currentLongPos, currentShortPos) =>
+    var bool newLongPos = currentLongPos
+    var bool newShortPos = currentShortPos
+    
+    if not na(lastHigh) and not na(lastLow)
+        longCondition = close > lastHigh and not currentLongPos
+        shortCondition = close < lastLow and not currentShortPos
+        
+        // Calculate stop loss and take profit levels
+        longStopPrice = close * (1 - StopLossPercent/100)
+        longTakePrice = close * (1 + TakeProfitPercent/100)
+        shortStopPrice = close * (1 + StopLossPercent/100)
+        shortTakePrice = close * (1 - TakeProfitPercent/100)
+        
+        // Long Entry
+        if longCondition
+            strategy.entry("Long", strategy.long)
+            strategy.exit("Long Exit", "Long", stop=longStopPrice, limit=longTakePrice)
+            newLongPos := true
+            newShortPos := false
+        
+        // Short Entry
+        if shortCondition
+            strategy.entry("Short", strategy.short)
+            strategy.exit("Short Exit", "Short", stop=shortStopPrice, limit=shortTakePrice)
+            newShortPos := true
+            newLongPos := false
+    
+    [newLongPos, newShortPos]
+
+// Main execution - modified to handle returned position states
+if bar_index > StructurePeriod
+    [newHigh, newLow] = analyzeMarketStructure()
+    lastValidHigh := newHigh
+    lastValidLow := newLow
+
+    [supplyZones, demandZones] = identifySupplyDemandZones()
+
+    if DrawZones
+        for zone in demandZones
+            line.new(bar_index, zone, bar_index + 10, zone, color=color.green)
+        for zone in supplyZones
+            line.new(bar_index, zone, bar_index + 10, zone, color=color.red)
+
+    // Update position states from executeTrades function
+    [newLongPos, newShortPos] = executeTrades(lastValidHigh, lastValidLow, inLongPosition, inShortPosition)
+    inLongPosition := newLongPos
+    inShortPosition := newShortPos
