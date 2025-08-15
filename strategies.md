@@ -2,269 +2,289 @@
 
 This index will contain text descriptions for strategies that will need to be converted into code.
 
+---
+
 ## Convertible Note Strategy
 
 I recently discovered an extremely predictable strategy that has thus far not yielded me a losing trade. This strategy was developed to exploit specific forced market mechanics that effectively put extreme sell pressure on stocks during specific time windows.
 
-This strategy is the convertible note strategy. It goes like this:
+### Steps
 
-1. Company issues a press release announcing a convertible note issuance.
+1. **Company Announcement**: Company issues a press release announcing a convertible note issuance.
+2. **Check the Filing**: Look for an exhibit 99.1 attachment in the filing. Identify the pricing window (usually a VWAP during a small timespan on the next trading day).
+3. **Open a PUT Contract**: Open a short-duration PUT contract shortly before the pricing window starts (1-2 hours prior).
+4. **Sell the PUT**: Sell the PUT shortly after the pricing window starts. Stocks often flatline due to institutional bond hedging.
 
-2. Go and check the filing. There will be an exhibit 99.1 as an attachment. Read this, and look for a pricing window (if not already priced). This pricing window is generally a VWAP during a small timespan on the next trading day. If the filing is released in the pre-market, it will be that same day. Here is the recent filing from MARA on Wednesday. It mentions 2 PM through 4 PM EST.
+### Key Insights
 
-3. Open a PUT contract (short duration is riskier but reward is insane) shortly before the pricing window starts. I would suggest 1-2 hours prior. If you open one in the morning, the price will likely bounce around a bit before declining into the window. The only thing that matters for the pricing here is the VWAP during the window.
+- **Mechanics**: Institutional bond hedging causes predictable price action.
+- **Pre-Priced Notes**: If the notes are pre-priced, the strategy remains the same as institutions hedge by shorting the underlying stock.
+- **Returns**: This strategy can yield consistent 100%+ returns if executed correctly.
 
-4. Sell the PUT shortly after the pricing window starts. Often, stocks will flatline. Here is another example of the exact same thing. Every time I have seen this happen, price action is almost the exact same, and I will explain why.
-
-This price action isn't due to normal bullish/bearish mechanics, or even shares actually being sold into the market. It is due to institutional bond hedging. When an institution buys the bonds, or intends to buy the bonds, they hedge their positions by selling/shorting the underlying stock. This is a mechanical process that happens every single time a bond is issued.
-
-Sometimes convertible note announcements are pre-priced, and the note selling takes place the next trading day. What is the plan then?
-
-The plan is the same. As the bonds get sold to qualified institutional buyers, these institutions short the underlying to hedge the position, and generally, these institutions are allowed to short naked. Here is ASTS, which happened today. Due to the convertible note selling, there was excess sell pressure on the stock. Even though the stock is in a bullish pattern on the daily, the sell pressure from the hedging today overwhelmed the buy pressure.
-
-While this strategy isn't an everyday occurrence since companies don't release these kinds of filings all the time, it is definitely something to keep in the toolkit since it can yield 100%+ returns consistently if done correctly. I personally generally paper-hand out when I get a minimum of 20% gain since that is still a big win for me.
-
-This strategy doesn't use chart patterns, TA, or anything. It exploits forced institutional hedging mechanics, which yield predictable and repeatable chart patterns.
+---
 
 ## Hybrid Strategy
 
 ### Longer-Term Swing Trades
 
-In high-conviction businesses where both technical and fundamental setups align.
+- Focus on high-conviction businesses where technical and fundamental setups align.
 
 ### Day Trades
 
-Positions fully opened and closed within market hours.
+- Positions fully opened and closed within market hours.
 
 #### Indicators
 
-- 10-day SMA (Simple Moving Average)
-- MACD (Moving Average Convergence Divergence)
+- **10-day SMA**: Simple Moving Average.
+- **MACD**: Moving Average Convergence Divergence.
 
 #### Rules of Engagement
 
-- Enter long or short when price breaks above or below the 10-day SMA, confirmed by a bullish or bearish MACD crossover.
-- Size up in each trade, scaling out quickly after 1%, 2%, or 3% moves, while letting a portion of the position “run.”
+- Enter long or short when the price breaks above or below the 10-day SMA, confirmed by a bullish or bearish MACD crossover.
+- Scale out profits quickly after 1%, 2%, or 3% moves, while letting a portion of the position “run.”
 
 #### Execution
 
-- Trade the underlying stock rather than options (though options can work if used properly).
-- Scale profits quickly—because if you’re not taking profits, someone else is—and let the last 25% ride until it hits a stop at either your entry or the previous day’s lows.
+- Trade the underlying stock rather than options.
+- Let the last 25% of the position ride until it hits a stop at either your entry or the previous day’s lows.
+
+---
 
 ## 200 EMA + Pullbacks
 
 ### Step 1: Identify the Direction of the Trend
 
-- **Method**: Use a 200-session Exponential Moving Average (EMA).
-  - If the price is above the 200 EMA, it indicates an uptrend.
-  - If the price is below the 200 EMA, it indicates a downtrend.
+- Use a **200-session EMA**:
+  - Above 200 EMA: Uptrend.
+  - Below 200 EMA: Downtrend.
 
 ### Step 2: Look for Discounts within the Trend (Pullbacks)
 
-- **Method**: Use a 20-session Exponential Moving Average (EMA).
-- **Interpretation**: The 20 EMA helps identify "pullbacks" or temporary corrections within the main trend.
-  - In an uptrend, look for price drops towards the 20 EMA.
-  - In a downtrend, look for price increases towards the 20 EMA.
+- Use a **20-session EMA** to identify pullbacks:
+  - Uptrend: Look for price drops towards the 20 EMA.
+  - Downtrend: Look for price increases towards the 20 EMA.
 
 ### Step 3: Confirm the End of the Pullback
 
-- **Method**: Use the Stochastic Oscillator indicator.
-- **Interpretation**:
-  - Overbought: Stochastic is above 80.
-  - Oversold: Stochastic is below 20.
+- Use the **Stochastic Oscillator**:
+  - Overbought: Above 80.
+  - Oversold: Below 20.
   - Divergence: Price moves in one direction while the Stochastic moves in the opposite.
-
-#### Confirmation for Trades
-
-- In uptrends, during a pullback, look for the Stochastic to indicate oversold conditions (below 20).
-- In downtrends, during a pullback, look for the Stochastic to indicate overbought conditions (above 80).
 
 #### Executing the Strategy
 
-- **Entry**: Enter a position when the price starts to continue in the direction of the main trend after the pullback and Stochastic confirmation.
+- **Entry**: Enter when the price resumes the main trend after pullback confirmation.
 - **Stop Loss**:
-  - For sell positions (downtrend): Place the stop loss above the previous high.
-  - For buy positions (uptrend): Place the stop loss below the previous low.
-- **Take Profit**: Aim for a minimum risk-reward ratio of 3:1. Since the strategy relies on trends, there's a high probability of continued movement.
+  - Downtrend: Place above the previous high.
+  - Uptrend: Place below the previous low.
+- **Take Profit**: Aim for a minimum risk-reward ratio of 3:1.
 
-## Three Candle
+---
 
-### Three-Candle Pattern
+## Three Candle Strategy
 
-- The maximum of two candles prior must be greater than the maximum of one candle prior.
-- The minimum of two candles prior must be less than the minimum of one candle prior.
-- The closing price of the current candle must be higher than the maximum of one candle prior.
+### Pattern Conditions
+
+1. The maximum of two candles prior must be greater than the maximum of one candle prior.
+2. The minimum of two candles prior must be less than the minimum of one candle prior.
+3. The closing price of the current candle must be higher than the maximum of one candle prior.
 
 ### Indicators
 
-- 40-session Exponential Moving Average (EMA).
-- 21-session Average True Range (ATR).
+- **40-session EMA**.
+- **21-session ATR**.
 
 ### Trade Execution
 
-- **Entry**: If the three-candle pattern conditions are met and the price is above the 40 EMA, a market buy order is executed at the opening of the next candle.
-- **Stop Loss**: Placed at two times the 21-session ATR.
-- **Take Profit**: Set at a risk-to-reward ratio of 2:1.
+- **Entry**: If the three-candle pattern is met and the price is above the 40 EMA, execute a market buy order at the next candle's opening.
+- **Stop Loss**: Set at 2x the 21-session ATR.
+- **Take Profit**: Use a 2:1 risk-to-reward ratio.
+
+---
 
 ## D1 Deceleration + H1 Fibonacci
 
-### D1 Deceleration
+### Steps
 
-- Each D1 candle’s range (high-low) shrinking?
-
-### Swing Range for Fibonacci (H1)
-
-- Calculate swing high/low from the last 8 bars
-
-### M5 MA Break
-
-- Should we use a specific EMA here (e.g., 20 EMA)?
-  - EMA 50
-- Is it a bullish/bearish close above/below the EMA?
-  - This is to buy so it should be a bullish close
+1. **D1 Deceleration**: Identify shrinking daily candle ranges.
+2. **H1 Fibonacci**: Calculate swing high/low from the last 8 bars.
+3. **M5 MA Break**: Look for a bullish close above the 50 EMA on the 5-minute chart.
 
 ### ATR Settings
 
-- Fixed % targets like “1.5x ATR SL, 2x ATR TP”
+- Use fixed % targets like “1.5x ATR SL, 2x ATR TP.”
 
 ### Risk Per Trade
 
-- 5%
+- Allocate 5% of the account per trade.
 
-## Multi Timeframe
+---
 
-### 1. Entry Conditions
+## Multi Timeframe Strategy
 
-- What triggers a Buy or Sell?
-  - Deceleration is observed on the daily chart
-  - The convergence of the price hitting both the 0.618 Fibonacci level and the 50 EMA on the hourly chart is a strong indication of an optimal entry point for a buy order.
-  - The final execution occurs when the 5-minute chart breaks a moving average.
-- Which indicators or price conditions are used?
-  - 50 EMA and Fibonacci levels
-- Any specific timeframe?
-  - D1, H1 and M5
+### Entry Conditions
 
-### 2. Exit Conditions
+- **Trigger**: Deceleration on the daily chart.
+- **Indicators**: 50 EMA and Fibonacci levels on the hourly chart.
+- **Execution**: Final entry occurs when the 5-minute chart breaks a moving average.
 
-- When do you close a trade?
-- Do you use:
-  - Fixed Stop Loss / Take Profit?
-    - based on volatility (e.g., ATR)
+### Exit Conditions
 
-### 3. Risk Management
+- Use fixed Stop Loss and Take Profit based on ATR.
 
-- Fixed lot size or dynamic based on balance?
-  - Based on balance
-- SL and TP in pips or ATR?
-  - These would need to be defined based on volatility (e.g., ATR) or fixed percentages.	
+### Risk Management
 
-### 4. Filters (Optional)
+- Position size based on account balance.
+- SL and TP defined by ATR or fixed percentages.
 
-- Trade only during specific hours?
-  - Daytrading
-- Avoid trading on Fridays or during news?
-  - No
-- Filter by volatility or trend strength?
-  - No
+---
 
-### 5. Other Preferences
+## BTC Strategies
 
-- Symbol(s)?
-  - Start with NVDA maybe
-- Timeframe?
-  - We need data from D1 and H1
-- Any special rules or custom indicators?
-  - EMA 50 and Fibonacci
+### Strategy 1: Sudden Bullish Breakouts
 
-## BTC strategies
+- **Entry**: Buy when a 70 EMA crosses above a 160 EMA.
+- **Exit**: Close when the 70 EMA crosses below the 160 EMA.
+- **Timeframe**: 30 minutes.
 
-### Strategy 1: Sudden Bullish Breakouts (Moving Averages Crossover)
+### Strategy 2: Quick Pullbacks
 
-- **Objective**: To enter during sudden upward movements.
-- **Entry Condition**: Buy when a short EMA (70) crosses above a long EMA (160)
-- **Exit Condition**: Close the position when the short EMA crosses below the long EMA.
-- **Parameters**:
-  - Timeframe: 30 minutes.
-  - Long EMA: 160 periods.
-  - Short EMA: 70 periods.
+- **Entry**: Go long after two consecutive bearish candles above a 20 EMA.
+- **Exit**: Close after 140 candles.
+- **Timeframe**: 30 minutes.
 
-### Strategy 2: Quick Pullbacks (Retracements)
+### Strategy 3: RSI Oversold Conditions
 
-- **Objective**: To capitalize on small, fast pullbacks before continuation.
+- **Entry**: Buy when RSI < 35, up to 5 positions.
+- **Exit**: Close all positions when RSI > 85.
+- **Timeframe**: 5 minutes.
 
-- **Entry Condition**: Go long when the price retreats for two consecutive bearish candles, provided it remains above an exponential moving average.
-- **Exit Condition**: Close the position after a predetermined number of candles have passed since the entry.
-- **Parameters**:
-  - Position Size: 10% of the account.
-  - Timeframe: 30 minutes.
-  - Number of candles to close position: 140.
-  - Exponential Moving Average: 20 periods.
+---
 
-### Strategy 3: Extended Corrective Phases (RSI Oversold Conditions)
-
-- **Objective**: To build long positions during significant price declines when Bitcoin is oversold.
-- **Entry Condition**: Begin buying when the Relative Strength Index (RSI) falls below 35, continuing to open positions (up to a maximum of five) as long as the RSI remains in the oversold zone.
-- **Exit Condition**: Close all positions when the RSI reaches 85 (overbought).
-- **Parameters**:
-  - RSI Period: 21.
-  - Buy Zone (Oversold): 30.
-  - Sell Zone (Overbought): 85.
-  - Timeframe: 5 minutes.
-  - Maximum Open Positions: 5.
-
-## Jesse framework
-
-### Detailed Breakdown of the Pairs-Trading Strategy
-
-The pairs-trading strategy outlined is a mean-reversion approach based on the statistical relationship between two highly correlated assets.
-
-### Key Components:
-
-- Asset Selection: Choose two assets that have a high price correlation (e.g., ETH/ETC). The assets must be cointegrated, which means their price spread is stable over time and tends to revert to the mean.
-- Spread and Z-Score:
-  - Spread: The spread is calculated as the difference between the normalized price returns of the two assets.
-  - Z-Score: This is the main signal for the strategy. It measures how many standard deviations the current spread is from its historical mean.
-
-### Trading Logic:
-
-- Entry Conditions:
-  - Long-Short Position: When the Z-score falls below a negative threshold (e.g., -1.2), it signals that one asset is undervalued relative to the other. The strategy enters by longing the undervalued asset and shorting the overvalued one.
-  - Short-Long Position: When the Z-score rises above a positive threshold (e.g., +1.2), the strategy enters by shorting the overvalued asset and longing the undervalued one.
-  - Exit Conditions: All positions are closed when the Z-score returns to the mean (zero). This is the core of the mean-reversion logic.
-
-### Risk Management:
-
-- Position Sizing: The position size for each asset is dynamically adjusted to ensure a market-neutral position, where the value of a move in one position is balanced by the other.
-- Cointegration Check: The strategy includes a daily check to ensure the pair remains cointegrated. If the relationship breaks, all open positions are liquidated.
-
-## LW Volatility Breakout Strategy
-
-This strategy is designed for a 5-minute timeframe and uses three indicators to confirm high-probability breakout trades.
+## Jesse Framework: Pairs-Trading Strategy
 
 ### Key Components
 
-- Donchian Channels:
-  - Settings: The length is set to 96.
-  - Function: The upper and lower bands of this indicator are used to identify potential breakout points.
-- LWTI (Larry Williams Large Trade Index):
-  - Settings: The period is set to 25 and the smoothing period to 20.
-  - Function: This indicator confirms the direction of the trend. It must be green for a long trade and red for a short trade.
-- Volume Indicator:
-  - Settings: The MA length is 30, and a volume moving average is enabled.
-  - Function: The volume bars must be above the moving average line to confirm sufficient momentum for the trade.
+- **Asset Selection**: Choose two highly correlated assets (e.g., ETH/ETC).
+- **Spread and Z-Score**:
+  - Spread: Difference between normalized price returns.
+  - Z-Score: Measures how far the spread is from its historical mean.
+
+### Trading Logic
+
+- **Entry**:
+  - Long-Short: Z-score < -1.2.
+  - Short-Long: Z-score > 1.2.
+- **Exit**: Close positions when Z-score returns to zero.
+
+### Risk Management
+
+- **Position Sizing**: Ensure market-neutral positions.
+- **Cointegration Check**: Daily check to ensure the pair remains cointegrated.
+
+---
+
+## LW Volatility Breakout Strategy
+
+### Key Components
+
+1. **Donchian Channels**:
+   - Length: 96.
+   - Used to identify breakout points.
+2. **LWTI**:
+   - Period: 25.
+   - Confirms trend direction.
+3. **Volume Indicator**:
+   - MA Length: 30.
+   - Confirms momentum.
 
 ### Trading Rules
 
-- For a Long Trade:
-  - Entry: The price must touch the upper red band of the Donchian Channels. The LWTI must be green, and the volume bars must be green and above their moving average line.
-  - Stop Loss: Place the stop loss below the middle orange line of the Donchian Channels or at the recent swing low.
-  - Take Profit: Use a 2:1 risk-to-reward ratio.
+- **Long Trade**:
+  - Entry: Price touches the upper Donchian band, LWTI is green, and volume is above its MA.
+  - Stop Loss: Below the middle Donchian line.
+  - Take Profit: 2:1 risk-to-reward ratio.
+- **Short Trade**:
+  - Entry: Price touches the lower Donchian band, LWTI is red, and volume is above its MA.
+  - Stop Loss: Above the middle Donchian line.
+  - Take Profit: 2:1 risk-to-reward ratio.
 
-- For a Short Trade:
-  - Entry: The price must touch the lower band of the Donchian Channels. The LWTI must be red, and the volume bars must be red and above their moving average line.
-  - Stop Loss: Place the stop loss just above the middle orange line.
-  - Take Profit: Use a 2:1 risk-to-reward ratio.
+---
 
-### Pro-Tip: A "Secret Trick" for Higher Probability
+## Larry Williams' Trading Strategy
 
-To increase the probability of success, the video suggests avoiding trades that are close to major support and resistance levels on a higher timeframe (e.g., a one-hour chart). The best signals occur when the price is actively breaking through one of these major levels while meeting all the other indicator requirements.
+### Rules
+
+- **Timing**: Only trades within the first 12 days of the month. No trades on Fridays. One trade per month.
+- **Entry**: Enter when a daily candle closes above the previous day's close.
+- **Indicator**: Williams %R must be below -20.
+
+### Exiting
+
+- **Stop Loss**: Fixed 2.5% below the entry point.
+- **Take Profit**: Close on the next day's opening after a positive-closing candle.
+
+### Optimizations
+
+1. **ATR Stop-Loss and Take-Profit**:
+   - Dynamic stop-loss and take-profit based on ATR.
+   - Best Asset: Natural Gas.
+   - Result: 70.75% return over 148 trades.
+2. **Adjusting Holding Period**:
+   - Minimum holding period of 12 candles.
+   - Best Asset: Nasdaq 100.
+   - Result: 232.84% return over 155 trades.
+
+Strategy 1: Price Action Trading (from https://www.youtube.com/watch?v=e-QmGJU1XYc)
+
+This strategy focuses on pure price action, without using any indicators or patterns. It's a three-step process designed to follow the trend.
+
+1. Identify Market Structure
+
+    Uptrends are defined by higher highs and higher lows. You should only look for bullish trades in an uptrend.
+
+    Downtrends are defined by lower lows and lower highs. You should only look for bearish trades in a downtrend.
+
+    A key rule is that a valid low must be the point that breaks the previous high in an uptrend, and the uptrend remains valid as long as this low is not broken.
+
+2. Identify Supply and Demand Zones
+
+    Demand Zones (for uptrends) are areas of consolidation just before a sharp upward move.
+
+    Supply Zones (for downtrends) are areas of consolidation just before a sharp downward move.
+
+3. Implement Risk-to-Reward Ratio
+
+    The final rule is to only take trades that have a risk-to-reward ratio of 2.5:1 or higher. This means for every dollar you risk, you stand to make at least $2.50. This rule is a filter to ensure profitability.
+
+Strategy 2: Seven Algorithmic Strategies (from https://www.youtube.com/watch?v=NojfYk31_xI)
+
+This video provides an overview of seven different algorithmic trading strategies. An algorithmic strategy uses a computer program to follow a strict set of rules to automatically buy and sell.
+
+1. Scaling In
+
+    This strategy divides capital into parts and buys at predetermined intervals to reduce risk and drawdown. An example is buying 50% on an initial signal and the remaining 50% when the 5-day RSI drops more than five percentage points.
+
+2. Sell the Rip
+
+    This is an exit strategy where you sell at the close when the closing price is higher than the previous day's high, a signal the video calls the "QS exit," which improves stability and profit.
+
+3. First Trading Day of the Month
+
+    This strategy involves going long on the S&P 500 at the close of the last trading day of the month and selling at the close of the first trading day of the new month.
+
+4. Pullback Trading
+
+    This strategy uses a trend filter, such as the 200-day moving average, to confirm a long-term bullish trend. It then buys on short-term weakness or pullbacks.
+
+5. Fabian Timing Model
+
+    This is a long-term, quantitative trend-following strategy for the stock market. It goes long on the S&P 500 if the S&P 500, Dow Jones, and utility sector indices are all above their 39-week moving average and sells when at least two are below it.
+
+6. Momentum Strategy by Meb Faber
+
+    This strategy trades stocks, bonds, and gold ETFs. It invests in each asset when its 3-month moving average is above the 10-month moving average and advises staying out of the market otherwise.
+
+7. Paying Subscriber Strategy
+
+    A mean-reversion strategy for the S&P 500 with a single variable for buying and one for selling.
