@@ -187,11 +187,11 @@ Positions fully opened and closed within market hours.
   - Timeframe: 30 minutes.
   - Long EMA: 160 periods.
   - Short EMA: 70 periods.
-&nbsp;		
+
 ### Strategy 2: Quick Pullbacks (Retracements)
 
 - **Objective**: To capitalize on small, fast pullbacks before continuation.
-&nbsp;	
+
 - **Entry Condition**: Go long when the price retreats for two consecutive bearish candles, provided it remains above an exponential moving average.
 - **Exit Condition**: Close the position after a predetermined number of candles have passed since the entry.
 - **Parameters**:
@@ -199,7 +199,7 @@ Positions fully opened and closed within market hours.
   - Timeframe: 30 minutes.
   - Number of candles to close position: 140.
   - Exponential Moving Average: 20 periods.
-&nbsp;		
+
 ### Strategy 3: Extended Corrective Phases (RSI Oversold Conditions)
 
 - **Objective**: To build long positions during significant price declines when Bitcoin is oversold.
@@ -212,3 +212,59 @@ Positions fully opened and closed within market hours.
   - Timeframe: 5 minutes.
   - Maximum Open Positions: 5.
 
+## Jesse framework
+
+### Detailed Breakdown of the Pairs-Trading Strategy
+
+The pairs-trading strategy outlined is a mean-reversion approach based on the statistical relationship between two highly correlated assets.
+
+### Key Components:
+
+- Asset Selection: Choose two assets that have a high price correlation (e.g., ETH/ETC). The assets must be cointegrated, which means their price spread is stable over time and tends to revert to the mean.
+- Spread and Z-Score:
+  - Spread: The spread is calculated as the difference between the normalized price returns of the two assets.
+  - Z-Score: This is the main signal for the strategy. It measures how many standard deviations the current spread is from its historical mean.
+
+### Trading Logic:
+
+- Entry Conditions:
+  - Long-Short Position: When the Z-score falls below a negative threshold (e.g., -1.2), it signals that one asset is undervalued relative to the other. The strategy enters by longing the undervalued asset and shorting the overvalued one.
+  - Short-Long Position: When the Z-score rises above a positive threshold (e.g., +1.2), the strategy enters by shorting the overvalued asset and longing the undervalued one.
+  - Exit Conditions: All positions are closed when the Z-score returns to the mean (zero). This is the core of the mean-reversion logic.
+
+### Risk Management:
+
+- Position Sizing: The position size for each asset is dynamically adjusted to ensure a market-neutral position, where the value of a move in one position is balanced by the other.
+- Cointegration Check: The strategy includes a daily check to ensure the pair remains cointegrated. If the relationship breaks, all open positions are liquidated.
+
+## LW Volatility Breakout Strategy
+
+This strategy is designed for a 5-minute timeframe and uses three indicators to confirm high-probability breakout trades.
+
+### Key Components
+
+- Donchian Channels:
+  - Settings: The length is set to 96.
+  - Function: The upper and lower bands of this indicator are used to identify potential breakout points.
+- LWTI (Larry Williams Large Trade Index):
+  - Settings: The period is set to 25 and the smoothing period to 20.
+  - Function: This indicator confirms the direction of the trend. It must be green for a long trade and red for a short trade.
+- Volume Indicator:
+  - Settings: The MA length is 30, and a volume moving average is enabled.
+  - Function: The volume bars must be above the moving average line to confirm sufficient momentum for the trade.
+
+### Trading Rules
+
+- For a Long Trade:
+  - Entry: The price must touch the upper red band of the Donchian Channels. The LWTI must be green, and the volume bars must be green and above their moving average line.
+  - Stop Loss: Place the stop loss below the middle orange line of the Donchian Channels or at the recent swing low.
+  - Take Profit: Use a 2:1 risk-to-reward ratio.
+
+- For a Short Trade:
+  - Entry: The price must touch the lower band of the Donchian Channels. The LWTI must be red, and the volume bars must be red and above their moving average line.
+  - Stop Loss: Place the stop loss just above the middle orange line.
+  - Take Profit: Use a 2:1 risk-to-reward ratio.
+
+### Pro-Tip: A "Secret Trick" for Higher Probability
+
+To increase the probability of success, the video suggests avoiding trades that are close to major support and resistance levels on a higher timeframe (e.g., a one-hour chart). The best signals occur when the price is actively breaking through one of these major levels while meeting all the other indicator requirements.
