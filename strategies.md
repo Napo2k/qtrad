@@ -1,12 +1,12 @@
 # Strategy Index
 
-This index will contain text descriptions for strategies that will need to be converted into code.
+This index contains text descriptions for strategies that need to be converted into code.
 
 ---
 
 ## Convertible Note Strategy
 
-I recently discovered an extremely predictable strategy that has thus far not yielded me a losing trade. This strategy was developed to exploit specific forced market mechanics that effectively put extreme sell pressure on stocks during specific time windows.
+This strategy exploits specific forced market mechanics that effectively put extreme sell pressure on stocks during specific time windows.
 
 ### Steps
 
@@ -235,56 +235,6 @@ I recently discovered an extremely predictable strategy that has thus far not yi
    - Best Asset: Nasdaq 100.
    - Result: 232.84% return over 155 trades.
 
-Strategy 1: Price Action Trading (from https://www.youtube.com/watch?v=e-QmGJU1XYc)
+---
 
-This strategy focuses on pure price action, without using any indicators or patterns. It's a three-step process designed to follow the trend.
-
-1. Identify Market Structure
-
-    Uptrends are defined by higher highs and higher lows. You should only look for bullish trades in an uptrend.
-
-    Downtrends are defined by lower lows and lower highs. You should only look for bearish trades in a downtrend.
-
-    A key rule is that a valid low must be the point that breaks the previous high in an uptrend, and the uptrend remains valid as long as this low is not broken.
-
-2. Identify Supply and Demand Zones
-
-    Demand Zones (for uptrends) are areas of consolidation just before a sharp upward move.
-
-    Supply Zones (for downtrends) are areas of consolidation just before a sharp downward move.
-
-3. Implement Risk-to-Reward Ratio
-
-    The final rule is to only take trades that have a risk-to-reward ratio of 2.5:1 or higher. This means for every dollar you risk, you stand to make at least $2.50. This rule is a filter to ensure profitability.
-
-Strategy 2: Seven Algorithmic Strategies (from https://www.youtube.com/watch?v=NojfYk31_xI)
-
-This video provides an overview of seven different algorithmic trading strategies. An algorithmic strategy uses a computer program to follow a strict set of rules to automatically buy and sell.
-
-1. Scaling In
-
-    This strategy divides capital into parts and buys at predetermined intervals to reduce risk and drawdown. An example is buying 50% on an initial signal and the remaining 50% when the 5-day RSI drops more than five percentage points.
-
-2. Sell the Rip
-
-    This is an exit strategy where you sell at the close when the closing price is higher than the previous day's high, a signal the video calls the "QS exit," which improves stability and profit.
-
-3. First Trading Day of the Month
-
-    This strategy involves going long on the S&P 500 at the close of the last trading day of the month and selling at the close of the first trading day of the new month.
-
-4. Pullback Trading
-
-    This strategy uses a trend filter, such as the 200-day moving average, to confirm a long-term bullish trend. It then buys on short-term weakness or pullbacks.
-
-5. Fabian Timing Model
-
-    This is a long-term, quantitative trend-following strategy for the stock market. It goes long on the S&P 500 if the S&P 500, Dow Jones, and utility sector indices are all above their 39-week moving average and sells when at least two are below it.
-
-6. Momentum Strategy by Meb Faber
-
-    This strategy trades stocks, bonds, and gold ETFs. It invests in each asset when its 3-month moving average is above the 10-month moving average and advises staying out of the market otherwise.
-
-7. Paying Subscriber Strategy
-
-    A mean-reversion strategy for the S&P 500 with a single variable for buying and one for selling.
+This improved formatting ensures clarity, proper hierarchy, and readability. Let me know if further
